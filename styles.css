@@ -1,29 +1,32 @@
 /* =========================================================
-   TOKENS
+   TOKENS Y FUENTE NUEVA
 ========================================================= */
+@font-face {
+  font-family: 'MazzardH';
+  src: url('fonts/MazzardH-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* Fondo blanco */
   --color-bg: #FFFFFF;
   --color-bg-alt: #F9FAFB;
   --color-surface: #F3F4F6;
   
-  /* Texto oscuro para la web blanca */
   --color-text: #111827;
   --color-text-muted: #4B5563;
   
-  /* Color rojizo para botones e index (acentos) */
   --color-accent: #D32F2F; 
   --color-accent-dim: #B71C1C;
   
-  /* Blanco para textos sobre fondos oscuros (como el vídeo) */
   --color-text-light: #FFFFFF;
   
   --color-border: rgba(0, 0, 0, 0.1);
 
-  --font-display: "Instrument Serif", Georgia, serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "MazzardH", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "MazzardH", -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Header más fino y estilizado */
   --header-height: 64px;
   --max-width: 1240px;
   --edge: clamp(20px, 5vw, 64px);
@@ -31,12 +34,14 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* =========================================================
-   RESET
-========================================================= */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Evita aumentos automáticos de texto extraños en móviles y asegura tamaño base correcto */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
-html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background: var(--color-bg);
@@ -63,7 +68,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 
 /* =========================================================
-   HEADER (Más fino, texto oscuro, no fijo)
+   HEADER
 ========================================================= */
 .site-header {
   position: relative;
@@ -86,14 +91,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   gap: 24px;
 }
 
-/* Contenedor del logo con desplazamiento hacia abajo para centrado perfecto */
 .logo {
   display: flex;
   align-items: center;
   transform: translateY(6px); 
 }
 
-/* Logo más grande */
 .site-logo {
   height: 72px; 
   width: auto;
@@ -106,7 +109,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   display: block;
 }
 
-/* Menú de navegación desplazado hacia abajo para alinearse con el logo */
 .main-nav {
   display: flex;
   align-items: center;
@@ -123,7 +125,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .nav-link:hover { color: var(--color-text); }
 
-/* Botón Hablemos también desplazado hacia abajo para mantener simetría */
 .header-cta { 
   margin-left: 24px; 
   transform: translateY(6px);
@@ -180,7 +181,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 
 /* =========================================================
-   HERO (Video apaisado y overlay alineado)
+   HERO (Video)
 ========================================================= */
 .hero {
   position: relative;
@@ -252,7 +253,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .hero-title {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: bold;
   font-size: clamp(2.6rem, 7vw, 5.2rem);
   line-height: 1.02;
   letter-spacing: -0.01em;
@@ -263,6 +264,61 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   max-width: 46ch;
   font-size: 1.05rem;
   color: rgba(255,255,255,0.8);
+}
+
+/* =========================================================
+   SECCIÓN: HAN CONFIADO EN NOSOTROS (CARRUSEL FLUIDO)
+========================================================= */
+.clients-section {
+  padding: 60px 0 40px 0;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.clients-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 32px;
+  color: var(--color-text);
+  
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s var(--ease) 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 64px;
+  width: max-content;
+  align-items: center;
+}
+
+.marquee-track img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  opacity: 1;
+  filter: none;
+  flex-shrink: 0;
 }
 
 /* =========================================================
@@ -295,7 +351,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .section-title {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: bold;
   font-size: clamp(2rem, 4.5vw, 3.4rem);
   line-height: 1.05;
 }
@@ -343,7 +399,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .project-meta h3 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: bold;
   font-size: 1.3rem;
   color: var(--color-text);
 }
@@ -377,7 +433,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .service-body h3 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: bold;
   font-size: 1.6rem;
   margin-bottom: 10px;
   color: var(--color-text);
