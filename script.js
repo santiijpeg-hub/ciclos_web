@@ -72,7 +72,7 @@ window.addEventListener('scroll', () => {
 const track = document.querySelector('.marquee-track');
 
 if (track) {
-  // Duplicamos el contenido dinámicamente para lograr un bucle infinito continuo
+  // Duplicamos el contenido exactamente una vez de forma limpia para el bucle
   track.innerHTML += track.innerHTML;
 
   let scrollPos = 0;
@@ -81,7 +81,7 @@ if (track) {
   function step() {
     scrollPos += speed;
     
-    // Al llegar a la mitad exacta, reiniciamos sin saltos visuales
+    // Al llegar a la mitad exacta del carrusel, reiniciamos a 0 de forma imperceptible
     const firstGroupWidth = track.scrollWidth / 2;
     if (scrollPos >= firstGroupWidth) {
       scrollPos = 0;
