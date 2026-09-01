@@ -46,3 +46,22 @@ contactForm.addEventListener('submit', (event) => {
   contactForm.reset();
   alert('Gracias por tu mensaje. Te responderemos muy pronto.');
 });
+// =============================================================
+// Animación de Scroll para el Vídeo (Reducción suave)
+// =============================================================
+const videoWrapper = document.querySelector('.video-wrapper');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const maxScroll = 600; 
+  
+  let progress = Math.min(scrollY / maxScroll, 1);
+  let currentScale = 1 - (progress * 0.05); 
+  
+  if (videoWrapper) {
+    if (scrollY > 10) {
+      videoWrapper.style.animation = 'none';
+    }
+    videoWrapper.style.transform = `scale(${currentScale})`;
+  }
+}, { passive: true });
