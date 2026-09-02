@@ -268,22 +268,26 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 
 /* =========================================================
-   SECCIÓN: HAN CONFIADO EN NOSOTROS (CARRUSEL Y ESPACIADO REDUCIDO)
+   SECCIÓN: HAN CONFIADO EN NOSOTROS (MÁS GRANDE Y DESTACADO)
 ========================================================= */
 .clients-section {
-  padding: 40px 0 30px 0;
+  padding: 60px 0 50px 0;
   background: var(--color-bg);
   overflow: hidden;
   width: 100%;
 }
 
+/* Título más pequeño y ajustado al borde izquierdo */
 .clients-title {
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem); /* Tamaño más pequeño y equilibrado */
   font-weight: bold;
   text-align: left;
   margin-bottom: 24px;
   color: var(--color-text);
+  
+  /* Reducimos el margen izquierdo para pegarlo más al borde */
+  padding-left: clamp(12px, 3vw, 28px); 
   
   opacity: 0;
   transform: translateY(30px);
@@ -303,10 +307,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   position: relative;
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 24px 0; /* Mayor grosor vertical del carrusel */
   white-space: nowrap;
 
-  /* Degradado transparente en ambos bordes (responsive) */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -325,20 +328,26 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .marquee-track {
   display: flex;
-  gap: 64px;
+  gap: 88px; /* Más espacio entre logos para que no se vea tan saturado */
   width: max-content;
   align-items: center;
 }
 
+/* Logos sustancialmente más grandes y con mayor grosor visual */
 .marquee-track img {
-  height: 42px;
+  max-height: 60px; /* Aumentado de 38px a 60px para mayor visibilidad */
+  max-width: 180px; /* Aumentado de 120px a 180px */
   width: auto;
+  height: auto;
+  
   object-fit: contain;
   opacity: 1;
   filter: none;
   flex-shrink: 0;
+  
+  display: block;
+  margin: auto;
 }
-
 /* =========================================================
    SECTIONS (shared) & TÍTULOS EN NEGRO FORZADO
 ========================================================= */
@@ -377,57 +386,60 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 
 /* =========================================================
-   PROYECTOS
+   PROYECTOS (Cuadrícula 2x2 y títulos superiores)
 ========================================================= */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.project-card--wide {
-  grid-column: span 3;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+  gap: 36px 28px; /* Espaciado entre elementos */
 }
 
 .project-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
+/* Recuadro superior con el mismo acabado estilizado que la tarjeta */
+.project-header-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+
+.project-header-box h3 {
+  font-family: var(--font-display);
+  font-weight: bold;
+  font-size: 1.15rem;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.project-header-box span {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* Recuadro visual/imagen */
 .project-thumb {
-  aspect-ratio: 16 / 10;
-  border-radius: 4px;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
   background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
   border: 1px solid var(--color-border);
   transition: border-color 0.3s var(--ease);
 }
 
-.project-card--wide .project-thumb {
-  aspect-ratio: 21 / 9;
-}
-
+/* Efectos hover unificados en la tarjeta entera */
+.project-card:hover .project-header-box,
 .project-card:hover .project-thumb {
   border-color: var(--color-accent);
-}
-
-.project-meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.project-meta h3 {
-  font-family: var(--font-display);
-  font-weight: bold;
-  font-size: 1.3rem;
-  color: var(--color-text);
-}
-
-.project-meta span {
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-  white-space: nowrap;
 }
 
 /* =========================================================
