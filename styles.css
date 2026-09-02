@@ -166,8 +166,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   border: 1px solid var(--color-border);
   color: var(--color-text);
 }
+
 .btn-ghost:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-border);
   color: var(--color-accent);
 }
 
@@ -176,6 +177,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   color: var(--color-text-light);
   border: 1px solid var(--color-accent);
 }
+
 .btn-solid:hover {
   background: var(--color-accent-dim);
   border-color: var(--color-accent-dim);
@@ -268,37 +270,40 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 
 /* =========================================================
-   SECCIÓN: HAN CONFIADO EN NOSOTROS (MÁS GRANDE Y DESTACADO)
+   ANIMACIÓN BIDIRECCIONAL AL HACER SCROLL
+========================================================= */
+.clients-title,
+.section-title {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  will-change: opacity, transform;
+}
+
+.clients-title.is-visible,
+.section-title.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   SECCIÓN: HAN CONFIADO EN NOSOTROS
 ========================================================= */
 .clients-section {
-  padding: 60px 0 50px 0;
+  padding: 40px 0 30px 0;
   background: var(--color-bg);
   overflow: hidden;
   width: 100%;
 }
 
-/* Título más pequeño y ajustado al borde izquierdo */
 .clients-title {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.8vw, 1.4rem); /* Tamaño más pequeño y equilibrado */
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   font-weight: bold;
   text-align: left;
   margin-bottom: 24px;
   color: var(--color-text);
-  
-  /* Reducimos el margen izquierdo para pegarlo más al borde */
-  padding-left: clamp(12px, 3vw, 28px); 
-  
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s var(--ease) 0.3s forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  padding-left: clamp(12px, 3vw, 28px);
 }
 
 .marquee-container {
@@ -307,7 +312,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   position: relative;
   display: flex;
   align-items: center;
-  padding: 24px 0; /* Mayor grosor vertical del carrusel */
+  padding: 24px 0;
   white-space: nowrap;
 
   -webkit-mask-image: linear-gradient(
@@ -328,31 +333,29 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .marquee-track {
   display: flex;
-  gap: 88px; /* Más espacio entre logos para que no se vea tan saturado */
+  gap: 88px;
   width: max-content;
   align-items: center;
 }
 
-/* Logos sustancialmente más grandes y con mayor grosor visual */
 .marquee-track img {
-  max-height: 60px; /* Aumentado de 38px a 60px para mayor visibilidad */
-  max-width: 180px; /* Aumentado de 120px a 180px */
+  max-height: 60px;
+  max-width: 180px;
   width: auto;
   height: auto;
-  
   object-fit: contain;
   opacity: 1;
   filter: none;
   flex-shrink: 0;
-  
   display: block;
   margin: auto;
 }
+
 /* =========================================================
-   SECTIONS (shared) & TÍTULOS EN NEGRO FORZADO
+   SECTIONS (shared) & TÍTULOS EN NEGRO
 ========================================================= */
 .section {
-  padding: 80px 0; /* Espaciado general equilibrado para las secciones */
+  padding: 80px 0;
   background: var(--color-bg);
 }
 
@@ -376,7 +379,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   margin-bottom: 12px;
 }
 
-/* Títulos de sección forzados en color negro puro (#111827) */
 .section-title {
   font-family: var(--font-display);
   font-weight: bold;
@@ -386,12 +388,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 
 /* =========================================================
-   PROYECTOS (Cuadrícula 2x2 y títulos superiores)
+   PROYECTOS (Cuadrícula 2x2, logo superpuesto y efectos hover)
 ========================================================= */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
-  gap: 36px 28px; /* Espaciado entre elementos */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px 28px;
 }
 
 .project-card {
@@ -400,7 +402,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   gap: 12px;
 }
 
-/* Recuadro superior con el mismo acabado estilizado que la tarjeta */
 .project-header-box {
   display: flex;
   align-items: center;
@@ -427,55 +428,57 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   white-space: nowrap;
 }
 
-/* Recuadro visual/imagen */
 .project-thumb {
+  position: relative;
   aspect-ratio: 16 / 9;
   border-radius: 6px;
   background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
   border: 1px solid var(--color-border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: border-color 0.3s var(--ease);
 }
 
-/* Efectos hover unificados en la tarjeta entera */
+/* Imagen de fondo / portada */
+.project-thumb .project-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+/* Logo superpuesto en formato destacado y centrado */
+.project-overlay-logo {
+  position: absolute;
+  z-index: 2;
+  max-width: 260px; /* Aumentado sustancialmente (antes 120px) */
+  max-height: 110px; /* Aumentado (antes 50px) */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform 0.4s var(--ease);
+}
+
+/* Hover: Borde neutro */
 .project-card:hover .project-header-box,
 .project-card:hover .project-thumb {
-  border-color: var(--color-accent);
+  border-color: var(--color-border);
 }
 
-/* =========================================================
-   SERVICIOS
-========================================================= */
-.service-list {
-  border-top: 1px solid var(--color-border);
+/* Hover: Desenfoque de la imagen de portada y ligero zoom */
+.project-card:hover .project-thumb .project-cover {
+  filter: blur(4px);
+  transform: scale(1.03);
 }
 
-.service-item {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 32px;
-  padding: 36px 0;
-  border-bottom: 1px solid var(--color-border);
+/* Hover: Agrandamiento suave y proporcionado del logo */
+.project-card:hover .project-overlay-logo {
+  transform: scale(1.1); /* Leve toque dinámico al pasar el ratón */
 }
-
-.service-index {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--color-accent);
-}
-
-.service-body h3 {
-  font-family: var(--font-display);
-  font-weight: bold;
-  font-size: 1.6rem;
-  margin-bottom: 10px;
-  color: var(--color-text);
-}
-
-.service-body p {
-  max-width: 60ch;
-  color: var(--color-text-muted);
-}
-
 /* =========================================================
    CONTACTO
 ========================================================= */
@@ -584,8 +587,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 ========================================================= */
 @media (max-width: 900px) {
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
-  .project-grid { grid-template-columns: 1fr 1fr; }
-  .project-card--wide { grid-column: span 2; }
 }
 
 @media (max-width: 720px) {
@@ -616,7 +617,25 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   .menu-toggle { display: flex; transform: translateY(6px); }
 
   .project-grid { grid-template-columns: 1fr; }
-  .project-card--wide { grid-column: span 1; }
 
   .service-item { grid-template-columns: 1fr; gap: 12px; }
+}
+/* =========================================================
+   ANIMACIÓN BIDIRECCIONAL AL HACER SCROLL (Títulos y Carrusel)
+========================================================= */
+.clients-title,
+.section-title,
+.marquee-container {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  will-change: opacity, transform;
+}
+
+/* Estado cuando entran en la vista (Scroll Down) */
+.clients-title.is-visible,
+.section-title.is-visible,
+.marquee-container.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
