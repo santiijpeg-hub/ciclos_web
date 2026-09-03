@@ -92,7 +92,7 @@
           <!-- Tarjeta 1: SIA ACADEMY -->
           <a href="#" class="project-card">
             <div class="project-header-box">
-              <h3>SIA ACADEMY</h3>
+              <h3>SIA Academy</h3>
               <span>Branded Content — 2025</span>
             </div>
             <div class="project-thumb">
@@ -103,12 +103,16 @@
             </div>
           </a>
 
+          <!-- Tarjeta 2: LION CAPITAL GROUP -->
           <a href="#" class="project-card">
             <div class="project-header-box">
-              <h3>Nombre del proyecto</h3>
+              <h3>LION CAPITAL GROUP</h3>
               <span>Commercials — 2025</span>
             </div>
-            <div class="project-thumb"></div>
+            <div class="project-thumb">
+              <img src="images/portadas_proyectos/Portada_LCG.jpg" alt="Portada Lion Capital Group" class="project-cover">
+              <img src="images/portadas_proyectos/2_LCG_blanco.png" alt="Logo Lion Capital Group" class="project-overlay-logo">
+            </div>
           </a>
 
           <a href="#" class="project-card">
@@ -215,10 +219,29 @@
         <a href="#contacto">Contacto</a>
       </nav>
 
-      <p class="footer-copy">© 2026 Ciclos. Todos los derechos reservados.</p>
+      <p class="footer-copy">© 2026 Ciclos</p>
     </div>
   </footer>
 
   <script src="script.js"></script>
+  
+  <!-- Cargar librería Lenis -->
+<script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+<!-- Inicializar el scroll suave -->
+<script>
+  const lenis = new Lenis({
+    duration: 1.2, // Controla la duración de la inercia (puedes subirlo o bajarlo)
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva de frenado
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+</script>
+
 </body>
 </html>

@@ -69,6 +69,25 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 
 /* =========================================================
+   SMOOTH SCROLL (LENIS)
+========================================================= */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* =========================================================
    HEADER
 ========================================================= */
 .site-header {
@@ -388,7 +407,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 
 /* =========================================================
-   PROYECTOS (Cuadrícula 2x2, logo superpuesto y efectos hover)
+   PROYECTOS (Cuadrícula 2x2, imágenes y logo superpuesto con hover)
 ========================================================= */
 .project-grid {
   display: grid;
@@ -428,6 +447,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   white-space: nowrap;
 }
 
+/* Contenedor preparado para centrar el logo superpuesto */
 .project-thumb {
   position: relative;
   aspect-ratio: 16 / 9;
@@ -441,7 +461,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   transition: border-color 0.3s var(--ease);
 }
 
-/* Imagen de fondo / portada */
+/* Imagen de portada de fondo */
 .project-thumb .project-cover {
   width: 100%;
   height: 100%;
@@ -450,12 +470,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   transition: filter 0.4s var(--ease), transform 0.4s var(--ease);
 }
 
-/* Logo superpuesto en formato destacado y centrado */
+/* Logo superpuesto en formato grande y centrado */
 .project-overlay-logo {
   position: absolute;
   z-index: 2;
-  max-width: 260px; /* Aumentado sustancialmente (antes 120px) */
-  max-height: 110px; /* Aumentado (antes 50px) */
+  max-width: 260px; /* Tamaño amplio */
+  max-height: 110px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -463,21 +483,26 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   transition: transform 0.4s var(--ease);
 }
 
-/* Hover: Borde neutro */
+/* Mantener el borde neutro al pasar el ratón */
 .project-card:hover .project-header-box,
 .project-card:hover .project-thumb {
   border-color: var(--color-border);
 }
 
-/* Hover: Desenfoque de la imagen de portada y ligero zoom */
+/* Efecto hover: desenfoque y ligero zoom en la portada */
 .project-card:hover .project-thumb .project-cover {
   filter: blur(4px);
   transform: scale(1.03);
 }
 
-/* Hover: Agrandamiento suave y proporcionado del logo */
+/* Efecto hover: escalado suave del logo */
 .project-card:hover .project-overlay-logo {
-  transform: scale(1.1); /* Leve toque dinámico al pasar el ratón */
+  transform: scale(1.1);
+}
+/* Ajuste específico para reducir levemente el logo de Lion Capital Group */
+.project-card:nth-child(2) .project-overlay-logo {
+  max-width: 210px; /* Reducido de 260px a 210px */
+  max-height: 90px;
 }
 /* =========================================================
    CONTACTO
@@ -620,9 +645,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
   .service-item { grid-template-columns: 1fr; gap: 12px; }
 }
-/* =========================================================
-   ANIMACIÓN BIDIRECCIONAL AL HACER SCROLL (Títulos y Carrusel)
-========================================================= */
+/* Animación bidireccional de entrada y salida */
 .clients-title,
 .section-title,
 .marquee-container {
@@ -632,7 +655,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   will-change: opacity, transform;
 }
 
-/* Estado cuando entran en la vista (Scroll Down) */
 .clients-title.is-visible,
 .section-title.is-visible,
 .marquee-container.is-visible {
