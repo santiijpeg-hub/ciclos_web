@@ -13,7 +13,15 @@
 
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+
+  <!-- ========================================== -->
+  <!-- PRELOADER -->
+  <!-- ========================================== -->
+  <div id="preloader">
+    <img src="images/LOGO CICLOS BLANCO-04.png" alt="Ciclos Logo" class="preloader-logo">
+  </div>
 
   <!-- ===== HEADER ===== -->
   <header class="site-header" id="site-header">
@@ -90,10 +98,10 @@
         <div class="project-grid">
 
           <!-- Tarjeta 1: SIA ACADEMY -->
-          <a href="#" class="project-card">
+         <a href="javascript:void(0)" class="project-card">
             <div class="project-header-box">
-              <h3>SIA Academy</h3>
-              <span>Branded Content — 2025</span>
+              <h3>SIA ACADEMY</h3>
+              <span>Contenido de marca</span>
             </div>
             <div class="project-thumb">
               <!-- Foto de portada -->
@@ -104,10 +112,10 @@
           </a>
 
           <!-- Tarjeta 2: LION CAPITAL GROUP -->
-          <a href="#" class="project-card">
+         <a href="javascript:void(0)" class="project-card">
             <div class="project-header-box">
               <h3>LION CAPITAL GROUP</h3>
-              <span>Commercials — 2025</span>
+              <span>Anuncio</span>
             </div>
             <div class="project-thumb">
               <img src="images/portadas_proyectos/Portada_LCG.jpg" alt="Portada Lion Capital Group" class="project-cover">
@@ -115,63 +123,109 @@
             </div>
           </a>
 
-          <a href="#" class="project-card">
+          <!-- Tarjeta 3: BALENTES -->
+         <a href="javascript:void(0)" class="project-card">
             <div class="project-header-box">
-              <h3>Nombre del proyecto</h3>
-              <span>Events Production — 2024</span>
+              <h3>BALENTES</h3>
+              <span>Anuncio</span>
             </div>
-            <div class="project-thumb"></div>
+            <div class="project-thumb">
+              <img src="images/portadas_proyectos/PORTADA_Balentes.jpg" alt="Portada Balentes" class="project-cover">
+              <img src="images/portadas_proyectos/10_BALENTES.png" alt="Logo Balentes" class="project-overlay-logo logo-invert">
+            </div>
           </a>
 
-          <a href="#" class="project-card">
+          <!-- Tarjeta 4: GALA FAES -->
+          <a href="javascript:void(0)" class="project-card">
             <div class="project-header-box">
-              <h3>Nombre del proyecto</h3>
-              <span>Social Media — 2024</span>
+              <h3>GALA FAES</h3>
+              <span>Retransmisión en LIVE</span>
             </div>
-            <div class="project-thumb"></div>
+            <div class="project-thumb">
+              <img src="images/portadas_proyectos/PORTADA_FAES.jpg" alt="Portada Gala FAES" class="project-cover">
+              <img src="images/portadas_proyectos/3_Gala_FAES.png" alt="Logo Gala FAES" class="project-overlay-logo logo-invert">
+            </div>
           </a>
-
+<!-- Tarjeta 5: ABRASAR-TE -->
+          <a href="javascript:void(0)" class="project-card">
+            <div class="project-header-box">
+              <h3>ABRASAR-TE</h3>
+              <span>Fotografía gastronómica</span>
+            </div>
+            <div class="project-thumb">
+              <img src="images/portadas_proyectos/Portada_ABRASARTE.jpg" alt="Portada Abrasar-te" class="project-cover">
+              <!-- Título tipográfico en lugar de imagen -->
+              <span class="project-overlay-title">ABRASAR-TE</span>
+            </div>
+          </a>
+          <!-- Tarjeta 6: DATA COMPLEX -->
+          <a href="javascript:void(0)" class="project-card">
+            <div class="project-header-box">
+              <h3>DataComplex</h3>
+              <span>Contenido corporativo</span>
+            </div>
+            <div class="project-thumb">
+              <img src="images/portadas_proyectos/Portada_DataComplex.jpg" alt="Portada Data Complex" class="project-cover">
+              <img src="images/portadas_proyectos/13_DATA_COMPLEX.png" alt="Logo Data Complex" class="project-overlay-logo logo-invert">
+            </div>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- ===== SERVICIOS ===== -->
-    <section class="section section--dark" id="servicios">
-      <div class="section-inner">
-        <div class="section-head">
-          <p class="section-kicker">Qué hacemos</p>
-          <h2 class="section-title">Servicios.</h2>
+   <!-- ===== SERVICIOS (VERSIÓN BLANCA CON ANIMACIONES) ===== -->
+    <section class="services-section" id="servicios">
+      
+      <!-- Contenedor izquierdo: Textos que cambian y se mueven -->
+      <div class="services-left">
+        <p class="section-kicker" style="margin-bottom: 2rem;">Qué hacemos</p>
+        
+        <!-- Nuevo contenedor que hace el efecto de subir/bajar -->
+        <div id="moving-text-box" class="moving-text-box">
+          <div id="dynamic-subtitle" class="service-subtitle">Branded Content</div>
+          <div id="dynamic-text" class="service-desc">Episodios, entrevistas o mini-documentales. Contenido que habla como tú y conecta con tu audiencia.</div>
         </div>
+      </div>
 
-        <ul class="service-list">
-          <li class="service-item">
-            <span class="service-index">01</span>
-            <div class="service-body">
-              <h3>Branded Content</h3>
-              <p>Episodios, entrevistas o mini-documentales. Contenido que habla como tú y conecta con tu audiencia.</p>
-            </div>
+      <!-- Contenedor derecho: Lista de servicios -->
+      <div class="services-right">
+        <ul class="services-list" id="services-list">
+          
+          <li class="service-item active" 
+              data-subtitle="Branded Content" 
+              data-text="Episodios, entrevistas o mini-documentales. Contenido que habla como tú y conecta con tu audiencia.">
+            <span class="service-title">Branded Content</span>
+          <!-- <span class="service-number">( 01 )</span>  -->
           </li>
-          <li class="service-item">
-            <span class="service-index">02</span>
-            <div class="service-body">
-              <h3>Commercials</h3>
-              <p>Publicidad que tu audiencia quiere ver, aunque no tenga que hacerlo.</p>
-            </div>
+
+          <li class="service-item" 
+              data-subtitle="Commercials" 
+              data-text="Publicidad que tu audiencia quiere ver, aunque no tenga que hacerlo.">
+            <span class="service-title">Commercials</span>
+            <!-- <span class="service-number">( 02 )</span> -->
           </li>
-          <li class="service-item">
-            <span class="service-index">03</span>
-            <div class="service-body">
-              <h3>Social Media Campaigns</h3>
-              <p>Campañas de contenido pensadas para conectar con personas, pieza a pieza.</p>
-            </div>
+
+          <li class="service-item" 
+              data-subtitle="Social Media Campaigns" 
+              data-text="Campañas de contenido pensadas para conectar con personas, pieza a pieza.">
+            <span class="service-title">Social Media Campaigns</span>
+            <!-- <span class="service-number">( 03 )</span> -->
           </li>
-          <li class="service-item">
-            <span class="service-index">04</span>
-            <div class="service-body">
-              <h3>Events Production</h3>
-              <p>No grabamos eventos: los convertimos en películas.</p>
-            </div>
+
+          <li class="service-item" 
+              data-subtitle="Events Production" 
+              data-text="No grabamos eventos: los convertimos en películas.">
+            <span class="service-title">Events Production</span>
+            <!-- <span class="service-number">( 04 )</span> -->
           </li>
+
+          <li class="service-item" 
+              data-subtitle="Fotografía" 
+              data-text="Capturamos la esencia de tu marca en cada disparo.">
+            <span class="service-title">Fotografía</span>
+            <!-- <span class="service-number">( 05 )</span> -->
+          </li>
+
         </ul>
       </div>
     </section>

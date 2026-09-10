@@ -120,9 +120,11 @@ if ('IntersectionObserver' in window) {
   titlesToAnimate.forEach((title) => titleObserver.observe(title));
 }
 // =============================================================
-// Animación Bidireccional de Títulos y Carrusel al hacer Scroll
+// Animación Bidireccional al hacer Scroll (Títulos, Carrusel y Proyectos)
 // =============================================================
-const elementsToAnimate = document.querySelectorAll('.clients-title, .section-title, .marquee-container');
+const elementsToAnimate = document.querySelectorAll(
+  '.clients-title, .section-title, .marquee-container, .project-card'
+);
 
 if ('IntersectionObserver' in window) {
   const observerOptions = {
@@ -134,10 +136,8 @@ if ('IntersectionObserver' in window) {
   const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Aparece deslizándose desde abajo al hacer scroll
         entry.target.classList.add('is-visible');
       } else {
-        // Se oculta al salir de la pantalla (scroll arriba o abajo)
         entry.target.classList.remove('is-visible');
       }
     });
@@ -145,3 +145,63 @@ if ('IntersectionObserver' in window) {
 
   elementsToAnimate.forEach((element) => scrollObserver.observe(element));
 }
+
+/* === ANIMACIÓN PRELOADER === */
+window.addEventListener('load', () => {
+  // Espera 1.8 segundos y luego desliza la pantalla negra hacia arriba
+  setTimeout(() => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.classList.add('preloader-hidden');
+    }
+  }, 1000); 
+});
+
+
+// ==========================================
+// EFECTO HOVER SERVICIOS CON LÍMITES ESTRICTOS (ARRIBA Y ABAJO AJUSTABLE)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const serviceItems = document.querySelectorAll('.service-item');
+  const movingTextBox = document.getElementById('moving-text-box');
+  const dynamicSubtitle = document.getElementById('dynamic-subtitle');
+  const dynamicText = document.getElementById('dynamic-text');
+  const servicesList = document.getElementById('services-list'); 
+
+  if(serviceItems.length > 0 && movingTextBox && servicesList) {
+    serviceItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        
+        // 1. Quitar estado activo a todos y dárselo al actual
+        serviceItems.forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+        
+        // 2. Cambiar los textos AL INSTANTE
+        dynamicSubtitle.textContent = item.getAttribute('data-subtitle');
+        dynamicText.textContent = item.getAttribute('data-text');
+
+        // 3. Mover la caja de la izquierda calculando límites
+        if (window.innerWidth > 900) {
+          
+          const itemCenter = item.offsetTop + (item.offsetHeight / 2);
+          let targetY = itemCenter - (movingTextBox.offsetHeight / 2);
+          
+          // --- AQUÍ ESTÁ EL AJUSTE ---
+          // Cambia este número para subir o bajar el límite inferior a tu gusto.
+          // Cuanto más alto sea el número, más arriba se frenará la caja.
+          const ajusteInferior = 60; 
+          
+          // Calculamos el tope restando tu ajuste artificial
+          const maxY = servicesList.offsetHeight - movingTextBox.offsetHeight - ajusteInferior;
+          
+          // Aplicamos los topes de seguridad:
+          if (targetY < 0) targetY = 0; // Tope superior estricto en 0
+          if (targetY > maxY) targetY = maxY; // Tope inferior ajustable
+          
+          movingTextBox.style.transform = `translateY(${targetY}px)`;
+        }
+        
+      });
+    });
+  }
+});

@@ -88,6 +88,44 @@ html.lenis, html.lenis body {
 }
 
 /* =========================================================
+   PRELOADER
+========================================================= */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000000; /* Fondo negro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Añadimos 'filter' a la transición con la misma curva de velocidad */
+  transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), filter 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+  filter: blur(0px); /* Arranca nítido */
+}
+
+.preloader-logo {
+  height: 200px; 
+  opacity: 0;
+  /* 
+   * GUÍA DE TIEMPOS:
+   * [1º número] Duración (lo que tarda el logo en aparecer)
+   * [2º número] Espera inicial (tiempo en negro antes de empezar)
+   */
+  animation: fadeInLogo 1.2s ease 0.1s forwards;
+}
+
+@keyframes fadeInLogo {
+  0% { opacity: 0; transform: scale(0.80); }
+  50% { opacity: 1; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.preloader-hidden {
+  transform: translateY(-100%);
+  filter: blur(15px); /* Aquí creamos el efecto 'Motion Blur' al subir */
+}
+
+/* =========================================================
    HEADER
 ========================================================= */
 .site-header {
@@ -289,21 +327,34 @@ html.lenis, html.lenis body {
 }
 
 /* =========================================================
-   ANIMACIÓN BIDIRECCIONAL AL HACER SCROLL
+   ANIMACIÓN BIDIRECCIONAL AL HACER SCROLL (Títulos, Carrusel y Tarjetas)
 ========================================================= */
 .clients-title,
-.section-title {
+.section-title,
+.marquee-container,
+.project-card {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
   will-change: opacity, transform;
 }
 
+/* Estado activo cuando entran en pantalla */
 .clients-title.is-visible,
-.section-title.is-visible {
+.section-title.is-visible,
+.marquee-container.is-visible,
+.project-card.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Retardo escalonado sutil (Stagger Effect) para las 6 tarjetas */
+.project-card:nth-child(1) { transition-delay: 0.0s; } /* 1. SIA Academy */
+.project-card:nth-child(2) { transition-delay: 0.1s; } /* 2. Lion Capital Group */
+.project-card:nth-child(3) { transition-delay: 0.2s; } /* 3. Balentes */
+.project-card:nth-child(4) { transition-delay: 0.3s; } /* 4. Gala FAES */
+.project-card:nth-child(5) { transition-delay: 0.4s; } /* 5. Proyecto 5 */
+.project-card:nth-child(6) { transition-delay: 0.5s; } /* 6. Proyecto 6 */
 
 /* =========================================================
    SECCIÓN: HAN CONFIADO EN NOSOTROS
@@ -499,10 +550,39 @@ html.lenis, html.lenis body {
 .project-card:hover .project-overlay-logo {
   transform: scale(1.1);
 }
-/* Ajuste específico para reducir levemente el logo de Lion Capital Group */
-.project-card:nth-child(2) .project-overlay-logo {
-  max-width: 210px; /* Reducido de 260px a 210px */
-  max-height: 90px;
+/* Logo superpuesto destacado y centrado (Modificado a un tamaño más equilibrado) */
+.project-overlay-logo {
+  position: absolute;
+  z-index: 2;
+  max-width: 210px; /* Cambiado de 260px a 210px */
+  max-height: 90px;  /* Cambiado de 110px a 90px */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform 0.4s var(--ease);
+}
+/* Inversión de colores para logos oscuros/negros */
+.project-overlay-logo.logo-invert {
+  filter: invert(1);
+}
+/* Título superpuesto en texto (Times New Roman) para proyectos sin logo */
+.project-overlay-title {
+  position: absolute;
+  z-index: 2;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: #FFFFFF;
+  text-align: center;
+  font-weight:300;
+  letter-spacing: -0.06em;
+  pointer-events: none;
+  transition: transform 0.4s var(--ease);
+}
+
+/* Hover: Mismo escalado suave que los logos superpuestos */
+.project-card:hover .project-overlay-title {
+  transform: scale(1.1);
 }
 /* =========================================================
    CONTACTO
@@ -660,4 +740,139 @@ html.lenis, html.lenis body {
 .marquee-container.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ========================================== */
+/* EFECTO HOVER AVANZADO - SECCIÓN SERVICIOS  */
+/* ========================================== */
+.services-section {
+  display: flex;
+  width: 100%;
+  max-width: 100%; 
+  margin: 0;
+  /* Reducimos el padding superior/inferior para ajustar los límites */
+  padding: 60px 2%; 
+  align-items: flex-start; 
+  background-color: #ffffff; 
+  color: #000000; 
+  box-sizing: border-box;
+}
+
+.services-left {
+  flex: 0.7;
+  padding-left: 20px; 
+  padding-right: 40px;
+  position: relative; 
+}
+
+/* Caja que se mueve físicamente arriba y abajo (Sin fade, solo movimiento) */
+.moving-text-box {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.service-subtitle {
+  color: #666666 !important; 
+  font-size: 0.95rem; /* Letra un pelín más pequeña */
+  margin-bottom: 0.8rem; /* Menos separación con el texto */
+  font-weight: 500;
+}
+
+.service-desc {
+  font-size: 1.35rem; /* Texto descriptivo más pequeño (antes 1.6) */
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: #000000 !important; 
+  max-width: 340px; /* ESTO FUERZA EL PÁRRAFO: Límite de ancho para que no sea una línea larga */
+}
+
+.services-right {
+  flex: 1.8;
+  position: relative;
+  padding-right: 20px;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative; 
+}
+
+.service-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0; 
+  color: #b3b3b3 !important; 
+  cursor: pointer;
+  /* 1. Dejamos solo la transición del color, quitamos el transform de aquí */
+  transition: color 0.3s ease; 
+}
+
+.service-item:first-child {
+  border-top: 1px solid #e0e0e0;
+}
+
+.service-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  /* 2. Le damos la orden de moverse suave a este texto */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-number {
+  color: #ff0033 !important; 
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-left: 15px;
+  margin-top: 5px;
+  /* 3. Y a este número también */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 4. Al pasar el ratón, la fila solo cambia de color (ya no se mueve) */
+.service-item:hover,
+.service-item.active {
+  color: #000000 !important; 
+}
+
+/* 5. Al pasar el ratón, movemos SOLO los textos hacia la derecha */
+.service-item:hover .service-title,
+.service-item.active .service-title,
+.service-item:hover .service-number,
+.service-item.active .service-number {
+  transform: translateX(35px); 
+}
+
+/* Adaptación a móviles */
+@media (max-width: 900px) {
+  .services-section {
+    flex-direction: column;
+    padding: 60px 4%;
+  }
+  .services-left {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+  .service-desc {
+    max-width: 100%; /* En móvil sí dejamos que ocupe más ancho */
+  }
+  .service-title {
+    font-size: 2.2rem;
+  }
+  .moving-text-box {
+    transform: none !important; 
+  }
+  .service-item:hover .service-title,
+  .service-item.active .service-title,
+  .service-item:hover .service-number,
+  .service-item.active .service-number {
+    transform: translateX(15px); /* Desplazamiento más sutil en móvil */
+  }
 }
